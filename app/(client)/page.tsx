@@ -24,7 +24,7 @@ export default async function Home() {
 
   return (
     <div>
-      <Header title="Articles" />
+      <Header title="Articles" tags />
       <div>
         {posts?.length > 0 &&
           posts?.map((post) => <PostComponent post={post} key={post?._id} />)}

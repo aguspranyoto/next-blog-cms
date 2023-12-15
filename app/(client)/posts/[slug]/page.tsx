@@ -7,6 +7,7 @@ import { VT323 } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { notFound } from "next/navigation";
 
 const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
@@ -36,6 +37,10 @@ export const revalidate = 60;
 const page = async ({ params }: Params) => {
   const post: Post = await getSinglePost(params?.slug);
 
+  if (!post) {
+    return notFound();
+  }
+
   return (
     <div>
       <Header title={post?.title} />
@@ -55,7 +60,7 @@ const page = async ({ params }: Params) => {
 
         <div className={richTextStyles}>
           <PortableText
-            value={post.body}
+            value={post?.body}
             components={myPortableTextComponents}
           />
         </div>
